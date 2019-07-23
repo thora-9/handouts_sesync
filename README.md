@@ -29,8 +29,20 @@ to this "handouts" folder. The result should be a subdirectory called
 [CONTRIBUTING.md]: CONTRIBUTING.md
 # handouts_sesync
 
+## Our project 
+
+What: Tradeoffs among water, energy and food resources and public health
+
+Why: To mitigate schistosomiasis transmission 
+
+Where: Senegal River Basin
+
+How: Modeling different scenarios of dam management 
+
 ## Collaborators
 - Tejasvi (TJ)
 - Tamee
+
+
 
 
