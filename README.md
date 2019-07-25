@@ -2,29 +2,27 @@
 
 My work at the SESYNC Cyberinfrastructure Course
 
-## Data
+## Our project 
 
-If this project does not contain a data folder, the way to access data
-for the worksheets depends on whether you are using RStudio Server and
-Jupyter hosted by SESYNC or your own compute resources.
+What: Tradeoffs among water, energy and food resources and public health
 
-To access the data from a SESYNC hosted environment, open RStudio and
-enter the following command at the `>` prompt.
+Why: To mitigate schistosomiasis transmission 
 
-```
-file.symlink('/nfs/public-data/training', 'data')
-```
+Where: Senegal River Basin
 
-Otherwise, download the "data.zip" folder from the course syllabus (if
-not currently there, it will be posted after the course), and unzip it
-to this "handouts" folder. The result should be a subdirectory called
-"data" within this project.
+How: Modeling different scenarios of dam management
 
-[CONTRIBUTING.md]: CONTRIBUTING.md
-# handouts_sesync
+## Goals for the week
+
+- Download TRMM precipitation data for our site
+- Input the NetCDF data into R; combine
+- Fit a statistical distribution to the precipitation data
+- Create a framework for running Monte Carlo simulations using this data to    incorporate climate scenarios
 
 ## Collaborators
 - Tejasvi (TJ)
 - Tamee
+
+
 
 
