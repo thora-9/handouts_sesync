@@ -1,0 +1,37 @@
+Format input P and T data
+- Utilize dplyr, zoo, lubridate
+- Filter by station of interest
+- Zoo to link date with observation and merge P & T by date
+```
+# Use zoo to index by date and merge
+MaliTemp.Date <- as.Date(MaliTemp$DATE, 
+  format = "%Y-%m-%d"
+  )
+mtz <- zoo(MaliTemp$TAVG, MaliTemp.Date)
+
+SenPrec.Date <- as.Date(SenPrec$DATE, 
+  format = "%Y-%m-%d"
+)
+spz <- zoo(SenPrec$PRCP, SenPrec.Date)
+
+mtp <- merge(mtz, spz, all = FALSE)
+```
+Reformat reservoir WLs
+- Utilize dplyr
+- Transform data form wide to long
+
+```
+WL_data = read.csv('WL_in_96-00.csv')
+
+WL_long = melt(WL_data, id.vars = c("Station", "Year", 'Day'))
+cur_data = WL_long
+i = 1
+for (i in 1:nrow(WL_long)){
+  cur_month = as.character(cur_data$variable[i])
+  if (cur_month == 'January' | cur_month == 'February'|  cur_month  == 'March'|  cur_month  == 'April'){
+    cur_data$Year[i] = cur_data$Year[i] + 1
+  }
+}
+```
+
+
