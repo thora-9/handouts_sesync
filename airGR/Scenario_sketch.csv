@@ -1,0 +1,48 @@
+#Select only the rainy season for modified WL fluctuations
+full = cur_day[-(32:243)]
+int = 7 #interval of drop sequence, in days (here is weekly)
+n <- length(full)
+f_int <- full[seq(1,n,int)]
+drop = 0.5 #total desired drop in meters
+per = 5 #period of time over which to achieve total drop in days
+drop_day = drop/per
+
+# here's some pseudo code
+for (cur_day = f_int){...
+	Release at (Q = 0.1 m * cur_area / 24 hours) until WL=initialWL-0.1m. Get daily stage to accommodate any inflow. 
+	Apply HP production according to the stage for each day and the rules already coded.	
+	Repeat for 5 days so total drop = 0.5 m. Recover for 2 days. 
+	Repeat during rainy season at weekly interval. 
+
+
+#here's my attempt at change that pseudo into code
+for (cur_day = f_int){
+	temp_stage = cur_stage
+	goal_stage = cur_stage-drop_day
+	for (cur_day = (cur_day:cur_day+(per-1))){  #here, I'm trying to say for the current day and the next 4 days, do this: 
+	if (temp_stage > goal_stage){	
+		cur_Q = (drop_day*cur_area)/24 #hourly rate of release -- do they release 24 hr/day??
+    		temp_y = data.frame(Q=cur_flow) #flip the prediction chart to predict H for a given Q
+	    	cur_H = predict(f4,temp_y) #flip the prediction chart to predict H for a given Q
+	} else if (temp_stage <= goal_stage){
+ 		if (cur_stage > cur_max){
+		    cur_Q = Qmax(cur_stage)
+		  } else if (cur_stage < cur_min | cur_stage < 197){
+		    cur_H = 0
+		    cur_Q = 10
+		  } else if (cur_stage < 204){ #do you need to say & > cur_min | > 197 also here?
+		    temp_x = data.frame(H=cur_stage)
+		    cur_H = 50#predict(f,temp_x)
+		    cur_Q = predict(f_50,temp_x)
+		  } else if (cur_stage >= 204 & cur_stage<208){
+		    temp_x = data.frame(H=cur_stage)
+		    cur_H = 205
+		    cur_Q = predict(f2,temp_x)
+		  } else if (cur_stage >= 208){
+		    temp_x = data.frame(H=cur_stage)
+		    cur_H = 205
+		    cur_Q = predict(f3,temp_x)
+		  }		
+
+
+
